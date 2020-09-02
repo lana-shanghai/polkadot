@@ -30,6 +30,7 @@ use grandpa::{self, FinalityProofProvider as GrandpaFinalityProofProvider};
 use sc_executor::native_executor_instance;
 use log::info;
 use sp_trie::PrefixedMemoryDB;
+#[cfg(feature = "full-node")]
 use consensus::pipeline::ValidationExecutionMode;
 pub use service::{
 	Role, PruningMode, TransactionPoolOptions, Error, RuntimeGenesis, RpcHandlers,
