@@ -31,7 +31,7 @@ pub use runtime_primitives::traits::{BlakeTwo256, Hash as HashT};
 pub use polkadot_core_primitives::v1::{
 	BlockNumber, Moment, Signature, AccountPublic, AccountId, AccountIndex,
 	ChainId, Hash, Nonce, Balance, Header, Block, BlockId, UncheckedExtrinsic,
-	Remark, DownwardMessage,
+	Remark, DownwardMessage, InboundDownwardMessage,
 };
 
 // Export some polkadot-parachain primitives
