@@ -26,7 +26,7 @@ use code_upgrader::{hash_state, HeadData, BlockData, State};
 
 #[test]
 pub fn execute_good_no_upgrade() {
-	let pool = parachain::wasm_executor::ValidationPool::new(true);
+	let pool = parachain::wasm_executor::ValidationPool::new();
 
 	let parent_head = HeadData {
 		number: 0,
@@ -49,7 +49,7 @@ pub fn execute_good_no_upgrade() {
 			relay_chain_height: 1,
 			code_upgrade_allowed: None,
 		},
-		parachain::wasm_executor::ExecutionMode::Remote(&pool),
+		parachain::wasm_executor::ExecutionMode::RemoteTest(&pool),
 		sp_core::testing::TaskExecutor::new(),
 	).unwrap();
 
@@ -63,7 +63,7 @@ pub fn execute_good_no_upgrade() {
 
 #[test]
 pub fn execute_good_with_upgrade() {
-	let pool = parachain::wasm_executor::ValidationPool::new(true);
+	let pool = parachain::wasm_executor::ValidationPool::new();
 
 	let parent_head = HeadData {
 		number: 0,
@@ -86,7 +86,7 @@ pub fn execute_good_with_upgrade() {
 			relay_chain_height: 1,
 			code_upgrade_allowed: Some(20),
 		},
-		parachain::wasm_executor::ExecutionMode::Remote(&pool),
+		parachain::wasm_executor::ExecutionMode::RemoteTest(&pool),
 		sp_core::testing::TaskExecutor::new(),
 	).unwrap();
 
@@ -107,7 +107,7 @@ pub fn execute_good_with_upgrade() {
 #[test]
 #[should_panic]
 pub fn code_upgrade_not_allowed() {
-	let pool = parachain::wasm_executor::ValidationPool::new(true);
+	let pool = parachain::wasm_executor::ValidationPool::new();
 
 	let parent_head = HeadData {
 		number: 0,
@@ -130,14 +130,14 @@ pub fn code_upgrade_not_allowed() {
 			relay_chain_height: 1,
 			code_upgrade_allowed: None,
 		},
-		parachain::wasm_executor::ExecutionMode::Remote(&pool),
+		parachain::wasm_executor::ExecutionMode::RemoteTest(&pool),
 		sp_core::testing::TaskExecutor::new(),
 	).unwrap();
 }
 
 #[test]
 pub fn applies_code_upgrade_after_delay() {
-	let pool = parachain::wasm_executor::ValidationPool::new(true);
+	let pool = parachain::wasm_executor::ValidationPool::new();
 
 	let (new_head, state) = {
 		let parent_head = HeadData {
@@ -161,7 +161,7 @@ pub fn applies_code_upgrade_after_delay() {
 				relay_chain_height: 1,
 				code_upgrade_allowed: Some(2),
 			},
-			parachain::wasm_executor::ExecutionMode::Remote(&pool),
+			parachain::wasm_executor::ExecutionMode::RemoteTest(&pool),
 			sp_core::testing::TaskExecutor::new(),
 		).unwrap();
 
@@ -197,7 +197,7 @@ pub fn applies_code_upgrade_after_delay() {
 				relay_chain_height: 2,
 				code_upgrade_allowed: None,
 			},
-			parachain::wasm_executor::ExecutionMode::Remote(&pool),
+			parachain::wasm_executor::ExecutionMode::RemoteTest(&pool),
 			sp_core::testing::TaskExecutor::new(),
 		).unwrap();
 

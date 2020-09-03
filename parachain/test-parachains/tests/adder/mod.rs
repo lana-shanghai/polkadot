@@ -65,7 +65,7 @@ pub fn execute_good_on_parent() {
 		add: 512,
 	};
 
-	let pool = parachain::wasm_executor::ValidationPool::new(true);
+	let pool = parachain::wasm_executor::ValidationPool::new();
 
 	let ret = parachain::wasm_executor::validate_candidate(
 		adder::wasm_binary_unwrap(),
@@ -77,7 +77,7 @@ pub fn execute_good_on_parent() {
 			relay_chain_height: 1,
 			code_upgrade_allowed: None,
 		},
-		parachain::wasm_executor::ExecutionMode::Remote(&pool),
+		parachain::wasm_executor::ExecutionMode::RemoteTest(&pool),
 		sp_core::testing::TaskExecutor::new(),
 	).unwrap();
 
@@ -93,7 +93,7 @@ fn execute_good_chain_on_parent() {
 	let mut number = 0;
 	let mut parent_hash = [0; 32];
 	let mut last_state = 0;
-	let pool = parachain::wasm_executor::ValidationPool::new(true);
+	let pool = parachain::wasm_executor::ValidationPool::new();
 
 	for add in 0..10 {
 		let parent_head = HeadData {
@@ -117,7 +117,7 @@ fn execute_good_chain_on_parent() {
 				relay_chain_height: number as RelayChainBlockNumber + 1,
 				code_upgrade_allowed: None,
 			},
-			parachain::wasm_executor::ExecutionMode::Remote(&pool),
+			parachain::wasm_executor::ExecutionMode::RemoteTest(&pool),
 			sp_core::testing::TaskExecutor::new(),
 		).unwrap();
 
@@ -135,7 +135,7 @@ fn execute_good_chain_on_parent() {
 
 #[test]
 fn execute_bad_on_parent() {
-	let pool = parachain::wasm_executor::ValidationPool::new(true);
+	let pool = parachain::wasm_executor::ValidationPool::new();
 
 	let parent_head = HeadData {
 		number: 0,
@@ -158,7 +158,7 @@ fn execute_bad_on_parent() {
 			relay_chain_height: 1,
 			code_upgrade_allowed: None,
 		},
-		parachain::wasm_executor::ExecutionMode::Remote(&pool),
+		parachain::wasm_executor::ExecutionMode::RemoteTest(&pool),
 		sp_core::testing::TaskExecutor::new(),
 	).unwrap_err();
 }

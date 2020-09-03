@@ -73,7 +73,7 @@ async fn run(
 )
 	-> SubsystemResult<()>
 {
-	let pool = ValidationPool::new(false);
+	let pool = ValidationPool::new();
 
 	loop {
 		match ctx.recv().await? {
