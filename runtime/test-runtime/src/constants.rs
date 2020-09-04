@@ -28,7 +28,7 @@ pub mod currency {
 pub mod time {
 	use primitives::v0::{Moment, BlockNumber};
 	// Testnet
-	pub const MILLISECS_PER_BLOCK: Moment = 6000;
+	pub const MILLISECS_PER_BLOCK: Moment = 1000;
 	pub const SLOT_DURATION: Moment = MILLISECS_PER_BLOCK;
 	// Testnet
 	pub const EPOCH_DURATION_IN_BLOCKS: BlockNumber = 10 * MINUTES;
