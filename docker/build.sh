@@ -9,7 +9,7 @@ cd $PROJECT_ROOT
 
 # Find the current version from Cargo.toml
 VERSION=`grep "^version" ./Cargo.toml | egrep -o "([0-9\.]+)"`
-GITUSER=chevdor
+GITUSER=lana-shanghai
 GITREPO=polkadot
 
 # Build the image
